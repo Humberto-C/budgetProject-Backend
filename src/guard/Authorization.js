@@ -15,8 +15,12 @@ module.exports.Authorization = async (req, res, next) => {
 
         req.person = payload.user;
         
+        
     } catch (error) {
         console.log(error.message);
+        if(error.message === 'jwt expired'){
+            return res.status(403).json(error.message);
+        }
         return res.status(403).json("Not Authorize");
     }
     next();

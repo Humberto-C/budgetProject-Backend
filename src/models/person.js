@@ -1,5 +1,3 @@
-const { poolHandler } = require('../utils/postgres');
-const bcrypt = require('bcryptjs');
 const db = require('../utils/postgres');
 
 
@@ -16,5 +14,6 @@ module.exports.createNewUser = ( email, bpassword, first_name, last_name, birth_
 };
 
 module.exports.getPersonFirstName = (person) => {
-    return db.query('SELECT first_name FROM person WHERE person=$1', [person]);
+    return db.query('SELECT person, first_name, last_name FROM person WHERE person=$1', [person]);
 };
+

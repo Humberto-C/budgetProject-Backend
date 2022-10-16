@@ -65,11 +65,11 @@ module.exports.loginPerson = async(req, res ,next) => {
         //4. give them the jwt token
 
         const token = jwtGenerator(person.rows[0].person);
-
+        
         res.json({ token });
 
     } catch (error) {
-        console.log(error.message);
+        
         res.status(500).send("Server Error");
     }
 };
@@ -87,10 +87,11 @@ module.exports.dashboard = async(req, res, next) => {
     try {
         //req.user has the payload
         // res.json(req.person);
+        console.log(res.status); 
 
         const person = await Person.getPersonFirstName(req.person);
 
-        res.json(person.rows[0]);
+        res.json(person.rows);
 
     } catch (error) {
         console.log(error.message);
