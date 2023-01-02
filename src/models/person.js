@@ -14,6 +14,7 @@ module.exports.createNewUser = ( email, bpassword, first_name, last_name, birth_
 };
 
 module.exports.getPersonFirstName = (person) => {
-    return db.query('SELECT person, first_name, last_name FROM person WHERE person=$1', [person]);
+    const userData = db.query('SELECT person_id, first_name, last_name FROM person WHERE person_id=$1', [person]);
+    return userData;
 };
 

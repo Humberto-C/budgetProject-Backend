@@ -1,7 +1,7 @@
 const db = require('../utils/postgres');
 
 module.exports.checkAccounts = (person_id) => {
-    const account = db.query('SELECT * FROM account WHERE person = $1', [person_id]);
+    const account = db.query('SELECT * FROM account WHERE person_id = $1', [person_id]);
     return account;
 }
 

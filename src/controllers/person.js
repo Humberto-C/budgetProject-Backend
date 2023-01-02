@@ -63,8 +63,8 @@ module.exports.loginPerson = async(req, res ,next) => {
         }
 
         //4. give them the jwt token
-
-        const token = jwtGenerator(person.rows[0].person);
+        
+        const token = jwtGenerator(person.rows[0].person_id);
         
         res.json({ token });
 
@@ -85,12 +85,9 @@ module.exports.isVerify = async (req, res, next) => {
 
 module.exports.dashboard = async(req, res, next) => {
     try {
-        //req.user has the payload
-        // res.json(req.person);
-        console.log(res.status); 
-
+        
         const person = await Person.getPersonFirstName(req.person);
-
+        console.log(person.rows[0]);
         res.json(person.rows);
 
     } catch (error) {
