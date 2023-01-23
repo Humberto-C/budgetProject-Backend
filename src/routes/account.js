@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getAccounts, newAccount } = require('../controllers/account');
+const { getBalance, getAccounts, newAccount } = require('../controllers/account');
 
 router.post('/dashboard/accounts', getAccounts);
 router.post('/dashboard/newaccount', newAccount);
+router.post('/dashboard/account_balance', getBalance);
 module.exports = router;

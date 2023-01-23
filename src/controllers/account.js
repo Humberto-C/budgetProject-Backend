@@ -3,7 +3,6 @@ const Account = require('../models/account');
 module.exports.getAccounts = async (req, res, next) => {
     try {
         const { person } = req.body;
-        console.log(person, 'aquivamos');
 
         const { checkAccounts } = Account;
 
@@ -46,3 +45,18 @@ module.exports.newAccount = async (req, res, next) => {
 
     }
 }
+
+module.exports.getBalance = async (req, res, next) => {
+    try {
+        const { person_id, account_id } = req.body;
+        const { checkBalance, checkCurrency } = Account;
+
+        const balance = await checkBalance(person_id, account_id);
+        const currency = await checkCurrency(person_id, account_id);
+
+        res.json({...balance.rows[0], ...currency.rows[0]});
+
+    } catch (error) {
+        console.error(error.message);
+    }
+};

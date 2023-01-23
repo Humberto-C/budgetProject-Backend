@@ -11,3 +11,16 @@ module.exports.addAccount = (accountObjData) => {
     const valuesArray = [person, description, account_name, initial_value, account_number, currency];
     return db.query(order, valuesArray);
 }
+
+module.exports.checkBalance = (person_id, account_id) => {
+    const balance = db.query('select sum(input_value) from input where person_id = $1 and account_id = $2', [person_id, account_id]);
+    return balance;
+};
+
+module.exports.checkCurrency = (person_id, account_id) => {
+    const currency = db.query(
+        'select currency from account where person_id = $1 and account_id = $2',
+        [person_id, account_id]
+    )
+    return currency;
+};

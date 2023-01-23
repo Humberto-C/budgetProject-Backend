@@ -16,10 +16,7 @@ module.exports.makeExpense = ( input_value, account_id, person_id, category ) =>
     return expense;
 };
 
-module.exports.makeTransfer = ( input_value, account_id, person_id, category ) => {
-    const transfer = db.query(
-        'insert into input(input_value, account_id, person_id, category) values($1, $2, $3, $4)',
-        [input_value, account_id, person_id, category]
-    )
-    return transfer;
-};
+module.exports.last10Moves = () => {
+    let moves = db.query('select account_id, category, input_value, add_date from input order by add_date desc limit 10');
+    return moves;
+}
