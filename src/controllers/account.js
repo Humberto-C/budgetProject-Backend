@@ -54,9 +54,28 @@ module.exports.getBalance = async (req, res, next) => {
         const balance = await checkBalance(person_id, account_id);
         const currency = await checkCurrency(person_id, account_id);
 
-        res.json({...balance.rows[0], ...currency.rows[0]});
+        res.json({ ...balance.rows[0], ...currency.rows[0] });
 
     } catch (error) {
         console.error(error.message);
     }
+};
+
+module.exports.getAccountHistory = async (req, res, next) => {
+    try {
+
+        const { account_id, person_id, month, year } = req.body;
+        console.log(account_id, person_id, month, year);
+        const { checkHistoryDate } = Account;
+
+        let accHistory = await checkHistoryDate(person_id, account_id, month, year);
+        return res.json(accHistory.rows);
+
+
+    } catch (error) {
+
+        console.error(error.message);
+
+    }
+
 };

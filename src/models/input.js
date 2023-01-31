@@ -17,6 +17,6 @@ module.exports.makeExpense = ( input_value, account_id, person_id, category ) =>
 };
 
 module.exports.last10Moves = () => {
-    let moves = db.query('select account_id, category, input_value, add_date from input order by add_date desc limit 10');
+    let moves = db.query('select account_id, category, input_value, add_date::timestamp(0) from input order by add_date desc limit 10');
     return moves;
 }

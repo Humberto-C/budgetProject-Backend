@@ -24,3 +24,11 @@ module.exports.checkCurrency = (person_id, account_id) => {
     )
     return currency;
 };
+
+module.exports.checkHistoryDate = (person_id, account_id, month, year) => {
+
+    const history = db.query('select category, input_value, add_date::timestamp(0) from input where person_id = $1 and account_id = $2 and extract(month from add_date) = $3 and extract(year from add_date) = $4 order by add_date desc', 
+    [person_id, account_id, month, year]
+    );
+    return history;
+};

@@ -37,3 +37,12 @@ module.exports.lastMovements = async (req, res, next) => {
         console.log(error.message);
     }
 };
+
+module.exports.validTransfer = (req, res, next) => {
+    const {tranferCategory} = req;
+    console.log(tranferCategory, 'esta entrando o no?')
+    if(!tranferCategory){
+        return res.status(401).json('Transfer Category/Comment Can Not be empty!')
+    }
+    next();
+};
